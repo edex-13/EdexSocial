@@ -1,0 +1,28 @@
+{
+  "name": "edexsocial",
+  "version": "1.0.0",
+  "description": "El backend completo de la red social minimalista llamada EdexSocial. Esto con microservicios , usuarios, posts, follow e interacciones.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edex-13/EdexSocial.git"
+  },
+  "keywords": [
+    "node",
+    "backend",
+    "redSocial"
+  ],
+  "author": "Ederson Felipe López Bolívar <ederson12f@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edex-13/EdexSocial/issues"
+  },
+  "homepage": "https://github.com/edex-13/EdexSocial#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nanoid": "^3.1.25"
+  }
+}
