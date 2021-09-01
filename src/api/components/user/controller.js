@@ -1,5 +1,5 @@
 const {nanoid} = require('nanoid');
-const user = require('.');
+const auth = require('../auth');
 const table = 'user';
 
 module.exports = (injectedStore) => {
@@ -13,21 +13,26 @@ module.exports = (injectedStore) => {
 	const getUser = (id) => {
 		return store.get(table, id);
 	};
-	const addUser = (newUserDate) => {
-		if (!newUserDate.name) {
-			throw new Error('No se ha encontrado el nombre del usuario');
+	const addUser = async(newUserData) => {
+		if (!newUserData.name || !newUserData.username || !newUserData.password) {
+			throw ('No se ha encontrado el nombre del usuario');
 		}
 		const newUser = {
 			id: nanoid(),
-			name: newUserDate.name,
+			name: newUserData.name,
+			username: newUserData.username
 		};
+		await auth.upsert({
+			...newUser,
+			password:newUserData.password
+		})
 		return store.add(table, newUser);
 	};
-	const updateUser = (newUserDate) => {
-		if (!newUserDate.id) {
-			throw new Error('No se ha encontrado el id del usuario especificado');
+	const updateUser = (newUserData) => {
+		if (!newUserData.id) {
+			throw ('No se ha encontrado el id del usuario especificado');
 		}
-		return store.update(table, newUserDate);
+		return store.update(table, newUserData);
 	};
 	return {
 		listUsers,

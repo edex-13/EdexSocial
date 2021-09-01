@@ -1,4 +1,6 @@
 const express = require('express');
+
+const secure = require('./secure')
 const response = require('../../../network/response');
 const controller = require('./index');
 
@@ -73,7 +75,7 @@ router.post('/', async (req, res) => {
 		response.error(responseMessage);
   }
 });
-router.put('/', async (req, res) => {
+router.put('/', secure('update'),async (req, res) => {
 	try {
 		const user = await controller.updateUser(req.body);
 		const responseMessage = {
