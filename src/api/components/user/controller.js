@@ -11,7 +11,8 @@ module.exports = (injectedStore) => {
 		return store.list(table);
 	};
 	const getUser = (id) => {
-		return store.get(table, id);
+		const column = 'id'
+		return store.get(table,column, id);
 	};
 	const addUser = async(newUserData) => {
 		if (!newUserData.name || !newUserData.username || !newUserData.password) {
@@ -41,7 +42,8 @@ module.exports = (injectedStore) => {
 		})
 	}
 	const listfollowing = (id)=>{
-		return store.get(table+'_follow',id)
+		const column = 'user_from'
+		return store.get(table+'_follow',column, id);
 	}
 	return {
 		listUsers,

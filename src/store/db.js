@@ -12,11 +12,9 @@ const list = (table) => {
 		});
 	});
 };
-// SELECT * FROM `user_follow` WHERE user_from = 'k_8oWaeG7ZC1-Fez8nW5x'
-const get = (table, id) => {
+const get = (table,column, id) => {
 	return new Promise((resolve, reject) => {
-		// db.query(`SELECT * FROM ${table}  WHERE user_from= ${id}`, (error, result) => {
-		db.query(`SELECT * FROM ${table} WHERE user_from = '${id}'`, (error, result) => {
+		db.query(`SELECT * FROM ${table} WHERE ${column} = '${id}'`, (error, result) => {
 			if (error) {
 				return reject(error);
 			}
