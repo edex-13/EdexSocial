@@ -28,10 +28,12 @@ const decodeHeader = (req) => {
 const check = {
 	own: (req, owner) => {
     const tokenDecoded = decodeHeader(req)
-    console.log(tokenDecoded)
     if(tokenDecoded.id != owner){
       throw ("Error , nooo")
     }
+  },
+  logged: (req) =>{
+    const tokenDecoded = decodeHeader(req)
   },
 };
 module.exports = {

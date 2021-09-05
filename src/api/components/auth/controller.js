@@ -13,7 +13,8 @@ module.exports = (injectedStore) => {
 			throw ('Error en al crear el auth del usuario');
 		}
 		const authData = {
-			...data,
+			id:data.id,
+			username:data.username,
 			password: await bcrypt.hash(data.password, 7)
 		};
 		return await store.add(table, authData);
@@ -22,7 +23,7 @@ module.exports = (injectedStore) => {
 		const data = await store.query(table, {username});
 		const isPasswordCorreCT = await bcrypt.compare(password, data.password)
 		if(isPasswordCorreCT){
-			return auth.sign(data)
+			return auth.sign({...data})
 		}else{
 			throw ("Error , usuario y/o contraseña invalidos")
 		}

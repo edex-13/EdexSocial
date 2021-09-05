@@ -6,6 +6,7 @@ const user = require('./components/user/network')
 const auth = require('./components/auth/network')
 const app = express()
 app.use(express.json());
+app.use(express.urlencoded({extended : false}));
 
 app.use('/user',user)
 app.use('/auth',auth)

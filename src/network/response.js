@@ -4,7 +4,7 @@ exports.success = ({req , res , messageUser = '' , statusCode = 200 , message})=
     status:statusCode,
     body: messageUser
   })
-  console.log(message)
+  // console.log(message)
 }
 exports.error = ({req , res , messageUser = 'Internal server error' , statusCode = 500 , message})=>{
   res.status(statusCode).send({

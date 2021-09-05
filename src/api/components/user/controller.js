@@ -34,10 +34,21 @@ module.exports = (injectedStore) => {
 		}
 		return store.update(table, newUserData);
 	};
+	const follow = (from , to)=>{
+		return store.add(table+'_follow',{
+			user_from:from,
+			user_to: to,
+		})
+	}
+	const listfollowing = (id)=>{
+		return store.get(table+'_follow',id)
+	}
 	return {
 		listUsers,
 		getUser,
 		addUser,
 		updateUser,
+		follow,
+		listfollowing,
 	};
 };

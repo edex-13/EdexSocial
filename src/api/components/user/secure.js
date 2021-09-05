@@ -7,6 +7,10 @@ module.exports = (action) => {
         auth.check.own(req , owner)
         next()
       },
+      follow:()=>{
+        auth.check.logged(req)
+        next()
+      }
     }
     const result = actions[action]
       ?actions[action]()

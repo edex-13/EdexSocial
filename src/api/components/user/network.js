@@ -28,6 +28,28 @@ router.get('/', async (req, res) => {
 		response.error(responseMessage);
 	}
 });
+router.get('/following', async (req, res) => {
+	try {
+		const usersFollowing = await controller.listfollowing(req.query.id);
+		const responseMessage = {
+			req,
+			res,
+			messageUser: usersFollowing,
+			statusCode: 200,
+			message: '[user/get] Todo correcto'+ req.query.id,
+		};
+		response.success(responseMessage);
+	} catch (error) {
+		const responseMessage = {
+			req,
+			res,
+			messageUser: 'Error al obtener los usuarios',
+			statusCode: 500,
+			message: `[user/get] ${error}`,
+		};
+		response.error(responseMessage);
+	}
+});
 
 router.get('/:id', async (req, res) => {
 	try {
@@ -55,6 +77,29 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		const user = await controller.addUser(req.body);
+		const responseMessage = {
+			req,
+			res,
+			messageUser: user,
+			statusCode: 200,
+			message: '[user/post] Todo correcto',
+		};
+
+		response.success(responseMessage);
+	} catch (error) {
+    const responseMessage = {
+			req,
+			res,
+			messageUser: 'Error al crear el usuario',
+			statusCode: 500,
+			message: `[user/post] ${error}`,
+		};
+		response.error(responseMessage);
+  }
+});
+router.post('/follow/:id',secure('follow'), async (req, res) => {
+	try {
+		const user = await controller.follow(req.user.id , req.params.id);
 		const responseMessage = {
 			req,
 			res,
